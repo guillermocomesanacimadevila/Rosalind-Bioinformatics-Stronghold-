@@ -20,7 +20,7 @@ FASTA_labels = ""
 
 # Conversion of FASTA file stored as a list into a dictionary
 for line in FASTA_file_read:
-    if ">" in line: # For every entry in the lhe list (does it have a ">")
+    if ">" in line: # For every entry in the the list (does it have a ">")
         FASTA_labels = line
         FASTA_dictionary[FASTA_labels] = "" # If = TRUE -> Create a key for that and store it in dictionary
     else:
