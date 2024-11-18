@@ -49,4 +49,4 @@ for dna in dna_array:
 for nucleotide, counts in profile_matrix.items():
     final_matrix += f"{nucleotide}: {' '.join(map(str, counts))}\n"
 
-print(final_matrix.replace(":", ""))
+print(final_matrix)
