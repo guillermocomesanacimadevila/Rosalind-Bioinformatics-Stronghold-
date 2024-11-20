@@ -49,4 +49,17 @@ for dna in dna_array:
 for nucleotide, counts in profile_matrix.items():
     final_matrix += f"{nucleotide}: {' '.join(map(str, counts))}\n"
 
+consensus_sequence = ""
+
+for pos in range(sequence_length):
+    max_count = 0
+    most_common_base = ""
+    dna_nucleotides = ["A", "C", "G", "T"]
+    for nucleotide in dna_nucleotides:
+        if profile_matrix[nucleotide][pos] > max_count:
+            max_count = profile_matrix[nucleotide][pos]
+            most_common_base = nucleotide
+    consensus_sequence += most_common_base
+
+print(consensus_sequence.upper())
 print(final_matrix)
