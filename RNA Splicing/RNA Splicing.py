@@ -72,6 +72,9 @@ def remove_introns(seq, introns):
     return seq, introns
 
 
+processed_seq = remove_introns(FASTA_open_RNA, FASTA_open_introns)
+prot_seq = translation(("".join(processed_seq)).replace(" ", ""))
+
 # Checking statement
 check = (remove_introns(FASTA_open_RNA, FASTA_open_introns))
 if check == FASTA_open_RNA:
@@ -79,4 +82,5 @@ if check == FASTA_open_RNA:
 else:
     print("The sequence is not the same as the starting one")
 
-print(remove_introns(FASTA_open_RNA, FASTA_open_introns))
+print(processed_seq)
+print(prot_seq)
