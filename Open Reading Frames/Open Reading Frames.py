@@ -1,5 +1,11 @@
 # ======== Initial functions ======== #
 
+def rev_comp(sequence):
+    rev_comp_dict = {"A": "T", "T": "A", "G": "C", "C": "G"}
+    for nuc in range(len(sequence)):
+        sequence[nuc] = rev_comp_dict[sequence[nuc]]
+    return sequence [::-1]
+
 def transcription(sequence):
     return sequence.replace('T', 'U')
 
@@ -39,15 +45,42 @@ def read_file(location):
                 sequence += line.replace("\n", "")
         return sequence
 
-orf_file = translation(transcription(read_file("~/Desktop/MACHINE LEARNING FITNESS TRACKER/Scripts/ORF/rosalind_orf.txt")))
-orf_file_rna = transcription("~/Desktop/MACHINE LEARNING FITNESS TRACKER/Scripts/ORF/rosalind_orf.txt")
+orf_file = translation(transcription(read_file("~/Desktop/rosalind_orf.txt")))
+orf_file_rna = transcription(read_file("~/Desktop/rosalind_orf.txt"))
+orf_file_rna_rev = transcription(rev_comp(orf_file_rna))
 print(orf_file)
 
+genes = []
 stop_codons = ["UAG", "UAA", "UGA"]
-genes = ""
-for nuc in orf_file:
-    codon = orf_file[nuc:nuc+3]
-    if orf_file_rna.startswith("AUG"):
-        if orf_file_rna.endswith(stop_codons):
-            genes += orf_file_rna
-print(genes)
+
+for nuc in range(0, len(orf_file_rna) - 2, 3):
+    codon = orf_file_rna[nuc:nuc+3]
+    if codon == "AUG":
+        gene = ""
+        for i in range(nuc, len(orf_file_rna) - 2, 3):
+            next_codon = orf_file_rna[i:i+3]
+            if next_codon in stop_codons:
+                break
+            gene += next_codon
+        if gene:
+            genes.append(translation(gene))
+
+genes_by_lines = "\n".join(genes)
+print(genes_by_lines)
+
+# Second loop, forgot to make it into a function
+genes_rev = []
+for nucleotide in range(0, len(orf_file_rna_rev) - 2, 3):
+    codon_1 = orf_file_rna_rev[nucleotide:nucleotide+3]
+    if codon_1 == "AUG":
+        gene_1 = ""
+        for i in range(nucleotide, len(orf_file_rna_rev) - 2, 3):
+            next_codon = orf_file_rna_rev[i:i+3]
+            if next_codon in stop_codons:
+                break
+            gene_1 += next_codon
+        if gene_1:
+            genes_rev.append(translation(gene_1))
+
+genes_by_lines_rev = "\n".join(genes_rev)
+print(genes_by_lines_rev)
