@@ -1,3 +1,7 @@
+# ======== Call libraries ======== #
+
+import os
+
 # ======== Initial functions ======== #
 
 def rev_comp(sequence):
