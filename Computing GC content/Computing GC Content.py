@@ -1,9 +1,9 @@
 import os
+
 def read_file(path_of_file):
     f = open(os.path.expanduser(path_of_file), 'r')
     return [line.strip() for line in f.readlines()]
-
-
+    
 def GC_counter(seq): # Function for index sum of "Gs" and "Cs" as a % of len(seq) -> index nucleotide sum
     total_gc_counter_percentage = (seq.count("G") + seq.count("C")) / len(seq) * 100
     return total_gc_counter_percentage # Return %
